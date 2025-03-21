@@ -7,7 +7,7 @@ The Stock Watchlist Alert Agent is an automated system that monitors your Intera
 ### Key Features
 
 - **Watchlist Monitoring**: Connects to IBKR API to track price movements of securities in your watchlists
-- **Multi-source News Collection**: Gathers news from Seeking Alpha, Google News, and Reddit
+- **Multi-source News Collection**: Gathers news from Seeking Alpha (free articles), Google News, and Reddit
 - **AI-powered Summarization**: Generates concise summaries explaining price movements
 - **Automated Email Alerts**: Sends formatted email reports with stock news summaries
 - **Duplicate Ticker Filtering**: Prevents redundant processing of stocks that appear in multiple watchlists
@@ -70,7 +70,7 @@ The Stock Watchlist Alert Agent is an automated system that monitors your Intera
 
 #### IBKR API Setup
 
-1. Download the Client Portal Web API from [IBKR's website](https://interactivebrokers.github.io/cpwebapi/)
+1. Download the Client Portal Web API from [IBKR's website](https://www.interactivebrokers.com/campus/ibkr-api-page/cpapi-v1/#download-java)
 2. Start the API gateway (instructions depend on your OS)
 3. Authenticate the session when prompted
 4. Keep the gateway running while using this agent
@@ -165,6 +165,7 @@ main(use_mock_data=True)
 1. The system makes multiple API calls which may take time to complete
 2. If you have many watchlists with many instruments, the total processing time will increase
 3. The script includes logging to help identify any performance bottlenecks
+4. Less popular or well known stocks and tickers may reflect incorrect information. Please be wary of this when reading through the email summary.
 
 ## For Contributors
 
@@ -190,44 +191,3 @@ stock-watchlist-alert-agent/
 ├── email_agent.py            # Email sending functionality
 └── requirements.txt          # Python dependencies
 ```
-
-### Development Guidelines
-
-1. **Code Style**: Follow PEP 8 guidelines for Python code
-2. **Documentation**: Add docstrings to all functions and classes
-3. **Error Handling**: Implement proper error handling and logging
-4. **Testing**: Add unit tests for new functionality
-5. **Environment Variables**: Never hardcode credentials; use environment variables
-
-### Adding New Features
-
-#### Adding a New News Source
-
-1. Create a new client in the `clients/` directory
-2. Implement the required methods to fetch news
-3. Update the `NewsService` class in `services/news_service.py` to use the new client
-4. Update the summarization service if needed
-
-#### Enhancing Summarization
-
-1. Modify the `SummarizationService` class in `services/summarization_service.py`
-2. Consider using different NLP techniques or API services
-3. Ensure the output format remains consistent
-
-#### Adding New Alert Methods
-
-1. Create a new agent file (e.g., `slack_agent.py`)
-2. Implement the functionality to send alerts via the new channel
-3. Update the main script to use the new alert method
-
-### Submitting Changes
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for your changes
-5. Submit a pull request with a clear description of the changes
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
